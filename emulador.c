@@ -17,6 +17,19 @@ typedef struct {
 /* Cada variável representa um elemento do barramento de memória do Ricoh 2A03, sendo que na programação as variáveis são 
 limitadas por bit (tendo 8 bits = 1 byte), logo, a maioria dos elementos se limitam a 1 byte de memória em uma variável do tipo unisgned int.
 O programcounter é reservado a 2 bytes de memória para que seja possível que ele carregue um endereço completo de qualquer outro elemnto do barramento de memória */
+ //barramento de memoria
+ uint8_t bus[0xFFFF];//declara um array de 64 kb
+
+uint8_t bus_read(uint16_t address);//ler da memoria
+void bus_write(uint16_t address, uint8_t value);//escrever da memoria
+
+void instrucaoLDA(Processador processador){
+processador.programcounter = 0x0600;
+
+uint8_t bus[0xFFFF];
+bus_write(0x0600, 0xA9); // LDA
+bus_write(0x0601, 0x00); // 0x00
+}
 
 int main() {
 
